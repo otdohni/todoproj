@@ -1,59 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Navbar } from './components/Navbar';
-import { ToDoFrom } from './components/ToDoForm';
-import { ToDoList } from './components/ToDoList';
-import { IToDo } from './interfaces';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { TodosPage } from './pages/TodosPage';
+import { AboutPage } from './pages/AboutPage';
 
 const App: React.FC = () => {
-
-  const [todos, setTodos] = useState<IToDo[]>([])
-
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('todos') || '[]') as IToDo[]
-    setTodos(saved)
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  }, [todos])
-
-  const addHandler = (title: string) => {
-    const newToDo: IToDo = {
-      title: title,
-      id: Date.now(),
-      completed: false,
-    }
-    // setTodos([newToDo, ...todos])
-    setTodos(prev => [newToDo, ...todos])
-  }
-
-  const toggleHandler = (id: number) => {
-    setTodos(prev => prev.map(todo => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed
-        console.log(todo.completed)
-      }
-      return todo
-    }))
-  }
-
-  const removeHandler = (id: number) => {
-    const acceptRemove = window.confirm("Хотите удалить дело?")
-    if (acceptRemove){
-      setTodos(prev => prev.filter(todo => todo.id !== id))
-    }
-  }
-
   return (
-  <>
+  <BrowserRouter>
     <Navbar />
     <div className='container'>
       <h1>Список текущих задач</h1>
-      <ToDoFrom onAdd={addHandler}/>
-      <ToDoList todos = {todos} onToggle = {toggleHandler} onRemove={removeHandler}/>
+      <Routes>
+        <Route Component={TodosPage} path='/'></Route>
+        <Route Component={AboutPage} path='/about'></Route>
+      </Routes>
     </div>
-  </>
+  </BrowserRouter>
   );
 }
 
