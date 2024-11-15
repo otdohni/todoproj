@@ -20,17 +20,20 @@ export const ToDoFrom: React.FC<ToDoFormProps> = (props) => {
     }
 
     return (
-        <div className="input-field mt2">
-            <input
-            onChange={changeHandler} 
-            value={title} 
-            type="text" 
-            id="title" 
-            placeholder="Введите название дела"
-            onKeyPress={keyPressHandler}
-            />
-            
-            <label htmlFor="title" className="active">Добавление задач</label>
-        </div>
+        <>
+            <h1>Список текущих задач</h1>
+            <div className="input-field mt2">
+                <input
+                onChange={changeHandler} 
+                value={title} 
+                type="text" 
+                id="title" 
+                placeholder="Введите название дела"
+                onKeyPress={keyPressHandler}
+                />
+                
+                <label htmlFor="title" className="active">Добавление задач</label>
+            </div>
+        </>
     )
 }

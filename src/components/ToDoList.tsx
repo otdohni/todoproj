@@ -10,7 +10,7 @@ type ToDoListProps = {
 export const ToDoList: React.FC<ToDoListProps> = ({todos, onRemove, onToggle}) => {
     if (todos.length === 0) {
         return (
-            <p className="center">No data</p>
+            <p className="center">Данные отсутствуют</p>
         )
     }
 

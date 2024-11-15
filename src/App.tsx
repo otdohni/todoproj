@@ -9,7 +9,6 @@ const App: React.FC = () => {
   <BrowserRouter>
     <Navbar />
     <div className='container'>
-      <h1>Список текущих задач</h1>
       <Routes>
         <Route Component={TodosPage} path='/'></Route>
         <Route Component={AboutPage} path='/about'></Route>
